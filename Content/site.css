@@ -1,191 +1,334 @@
-﻿/* ===========================
-   PALETA DE COLORES
-=========================== */
+﻿/*==========================================================
+    SISTEMA DE COTIZACIÓN DE PRÉSTAMOS
+    Paleta Institucional
+===========================================================
+ 
+#FFFFFF
+#F5EEC3
+#C7B299
+#AFCCA8
+#AE0C3E
+#33211C
+ 
+==========================================================*/
 
-:root {
-    --color-principal: #33211C;
-    --color-secundario: #AFCCA8;
-    --color-acento: #AE0C3E;
-    --color-beige: #C7B299;
-    --color-crema: #F5EEC3;
-    --color-blanco: #FFFFFF;
-}
-
-/* ===========================
-   GENERAL
-=========================== */
-
-body {
+* {
     margin: 0;
     padding: 0;
-    background: #F8F8F8;
-    font-family: 'Segoe UI',sans-serif;
+    box-sizing: border-box;
 }
 
-h1, h2, h3 {
-    color: var(--color-principal);
-}
-
-a {
-    text-decoration: none;
-}
-
-/* ===========================
-   HEADER
-=========================== */
-
-.header {
-    height: 80px;
-    background: var(--color-crema);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 30px;
-    padding-right: 30px;
-    border-bottom: 3px solid var(--color-beige);
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: var(--color-principal);
-}
-
-/* ===========================
-   SIDEBAR
-=========================== */
-
-.sidebar {
-    width: 250px;
-    background: var(--color-principal);
-    min-height: 100vh;
-    float: left;
-}
-
-    .sidebar a {
-        color: white;
-        display: block;
-        padding: 18px;
-        font-size: 16px;
-    }
-
-        .sidebar a:hover {
-            background: var(--color-secundario);
-            color: #33211C;
-        }
-
-/* ===========================
-   CONTENIDO
-=========================== */
-
-.content {
-    margin-left: 250px;
-    padding: 30px;
-}
-
-/* ===========================
-   BOTONES
-=========================== */
-
-.btn-primary {
-    background: #AFCCA8;
-    color: #33211C;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.btn-danger {
-    background: #AE0C3E;
-    color: white;
-}
-
-/* ===========================
-   GRIDVIEW
-=========================== */
-
-table {
+html,
+body {
     width: 100%;
-    border-collapse: collapse;
+    height: 100%;
+    font-family: 'Segoe UI',Tahoma,sans-serif;
+    background: #F8F7F3;
+    color: #33211C;
 }
 
-th {
-    background: #33211C;
-    color: white;
-    padding: 12px;
-}
-
-td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-tr:nth-child(even) {
-    background: #F5EEC3;
-}
-
-/* ===========================
-   FOOTER
-=========================== */
-
-.footer {
-    clear: both;
-    background: #33211C;
-    color: white;
-    text-align: center;
-    padding: 15px;
-}
-/*==========================
-LAYOUT
-==========================*/
-
-.wrapper {
-    display: flex;
-}
+/*==========================================================
+TOPBAR
+==========================================================*/
 
 .topbar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 70px;
+    right: 0;
+    height: 75px;
     background: #33211C;
     color: white;
     display: flex;
     align-items: center;
-    padding-left: 30px;
-    z-index: 1000;
+    padding-left: 220px;
+    z-index: 999;
+    border-bottom: 4px solid #AE0C3E;
+    box-shadow: 0 8px 20px rgba(0,0,0,.18);
 }
+
+    .topbar h2 {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: .5px;
+    }
+
+    .topbar i {
+        color: #F5EEC3;
+        margin-right: 10px;
+    }
+
+/*==========================================================
+SIDEBAR
+==========================================================*/
 
 .sidebar {
-    margin-top: 70px;
-    width: 250px;
-    min-height: 100vh;
+    position: fixed;
+    top: 75px;
+    left: 0;
+    width: 190px;
+    bottom: 0;
     background: #AFCCA8;
-    display: flex;
-    flex-direction: column;
+    padding-top: 20px;
+    box-shadow: 4px 0 18px rgba(0,0,0,.08);
 }
 
-    .sidebar a {
-        padding: 18px;
-        text-decoration: none;
+    .sidebar h4 {
         color: #33211C;
-        font-weight: bold;
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #33211C;
+        text-decoration: none;
+        padding: 14px 18px;
+        margin: 6px 10px;
+        border-radius: 12px;
+        font-size: 15px;
+        transition: .25s;
     }
 
         .sidebar a:hover {
             background: #C7B299;
+            transform: translateX(4px);
         }
 
+        .sidebar a.active {
+            background: #AE0C3E;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(174,12,62,.35);
+        }
+
+        .sidebar a i {
+            width: 20px;
+        }
+
+        .sidebar a.active i {
+            color: white;
+        }
+
+/*==========================================================
+CONTENIDO
+==========================================================*/
+
 .content {
-    margin-top: 70px;
-    flex: 1;
-    padding: 40px;
-    background: white;
+    margin-left: 190px;
+    margin-top: 90px;
+    padding: 30px;
 }
 
-    .content h1 {
+    .content h2 {
         color: #33211C;
+        font-size: 46px;
+        margin-bottom: 6px;
     }
+
+    .content p {
+        color: #777;
+        font-size: 17px;
+    }
+
+/*==========================================================
+CARD
+==========================================================*/
+
+.card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.card-header {
+    background: #33211C !important;
+    color: white !important;
+    font-size: 20px;
+    padding: 15px 20px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/*==========================================================
+TABLA
+==========================================================*/
+
+.table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+    .table thead th {
+        background: #33211C;
+        color: white;
+        font-size: 15px;
+        text-align: center;
+        border: none;
+    }
+
+    .table tbody td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.table-striped tbody tr:nth-child(odd) {
+    background: #FFFDF9;
+}
+
+.table-hover tbody tr:hover {
+    background: #F5EEC3;
+    transition: .25s;
+}
+/*==========================================================
+BOTONES
+==========================================================*/
+
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 9px 18px;
+}
+
+.btn-primary {
+    background: #AE0C3E;
+    border-color: #AE0C3E;
+}
+
+    .btn-primary:hover {
+        background: #8D0933;
+        border-color: #8D0933;
+    }
+
+.btn-success {
+    background: #AFCCA8;
+    color: #33211C;
+    border: none;
+}
+
+.btn-warning {
+    background: #C7B299;
+    color: #33211C;
+    border: none;
+}
+
+.btn-danger {
+    background: #AE0C3E;
+    border: none;
+}
+/*==========================================================
+FORMULARIOS
+==========================================================*/
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    border: 1px solid #C7B299;
+    height: 45px;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #AE0C3E;
+        box-shadow: 0 0 0 .18rem rgba(174,12,62,.15);
+    }
+/*==========================================================
+GRIDVIEW
+==========================================================*/
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    font-weight: 600;
+}
+
+td {
+    padding: 12px;
+}
+
+/*==========================================================
+TÍTULOS
+==========================================================*/
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 700;
+}
+
+/*==========================================================
+SCROLL
+==========================================================*/
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #C7B299;
+    border-radius: 10px;
+}
+
+/*==========================================================
+RESPONSIVE
+==========================================================*/
+
+@media(max-width:992px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .topbar {
+        padding-left: 20px;
+    }
+
+    .content {
+        margin-left: 0;
+        margin-top: 25px;
+        padding: 20px;
+    }
+}
+.page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    text-align: center;
+}
+
+    .stats-card h3 {
+        color: #AE0C3E;
+        font-size: 34px;
+    }
+
+    .stats-card span {
+        color: #666;
+        font-size: 15px;
+    }
+.card,
+.btn,
+.sidebar a {
+    transition: .30s;
+}
