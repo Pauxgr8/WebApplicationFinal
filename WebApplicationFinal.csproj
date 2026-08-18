@@ -150,9 +150,14 @@
   <ItemGroup>
     <Content Include="Content\site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\logo.png" />
     <Content Include="Views\CapacidadPago\Index.aspx" />
     <Content Include="Views\Default.aspx" />
+    <Content Include="Views\Encuesta.aspx" />
     <Content Include="Views\Estilos.css" />
+    <Content Include="Views\GestionCRUD.aspx" />
+    <Content Include="Views\Reportes.aspx" />
+    <Content Include="Views\Usuarios.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +168,8 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Encuesta.cs" />
     <Compile Include="Models\Genero.cs" />
+    <Compile Include="Models\LoginRequest.cs" />
+    <Compile Include="Models\LoginResponse.cs" />
     <Compile Include="Models\MedioContratacion.cs" />
     <Compile Include="Models\NivelEducativo.cs" />
     <Compile Include="Models\Plazo.cs" />
@@ -195,6 +202,7 @@
     <Compile Include="Services\ITasaInteresService.cs" />
     <Compile Include="Services\ITipoPrestamoService.cs" />
     <Compile Include="Services\IUsuarioService.cs" />
+    <Compile Include="Services\LoginService.cs" />
     <Compile Include="Services\MedioContratacionService.cs" />
     <Compile Include="Services\NivelEducativoService.cs" />
     <Compile Include="Services\PlazoService.cs" />
@@ -220,6 +228,34 @@
     <Compile Include="Views\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Encuesta.aspx.cs">
+      <DependentUpon>Encuesta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Encuesta.aspx.designer.cs">
+      <DependentUpon>Encuesta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GestionCRUD.aspx.cs">
+      <DependentUpon>GestionCRUD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\GestionCRUD.aspx.designer.cs">
+      <DependentUpon>GestionCRUD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reportes.aspx.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reportes.aspx.designer.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -233,7 +269,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Images\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>
