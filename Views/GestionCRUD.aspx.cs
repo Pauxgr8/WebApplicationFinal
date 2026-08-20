@@ -139,7 +139,6 @@ namespace WebApplicationFinal.Views
             usuario.Correo = txtCorreo.Text;
             usuario.UsuarioLogin = txtUsuario.Text;
             usuario.Contrasena = txtPassword.Text;
-
             usuario.Activo = true;
 
             if (btnGuardar.Text == "Guardar")
@@ -149,20 +148,35 @@ namespace WebApplicationFinal.Views
                 if (servicio.CrearUsuario(usuario))
                 {
                     LimpiarFormulario();
+                    CargarUsuarios();
+                    pnlFormulario.Visible = false;
+                }
+                else
+                {
+                    Response.Write("<script>alert('No se pudo crear el usuario');</script>");
                 }
             }
             else
             {
                 usuario.IdUsuario = IdUsuarioEditar;
+
+                usuario.UsuarioCreacion = Session["Nombre"].ToString();
                 usuario.UsuarioModificacion = Session["Nombre"].ToString();
 
                 if (servicio.ModificarUsuario(usuario))
                 {
                     LimpiarFormulario();
+                    CargarUsuarios();
+
+                    pnlFormulario.Visible = false;
+                    btnGuardar.Text = "Guardar";
+                }
+                else
+                {
+                    Response.Write("<script>alert('No se pudo actualizar el usuario');</script>");
                 }
             }
         }
-
         private void LimpiarFormulario()
         {
             pnlFormulario.Visible = false;
@@ -178,9 +192,11 @@ namespace WebApplicationFinal.Views
 
             CargarUsuarios();
         }
-
         protected void gvDatos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            // ==========================
+            // EDITAR
+            // ==========================
             if (e.CommandName == "Editar")
             {
                 int fila = Convert.ToInt32(e.CommandArgument);
@@ -189,17 +205,33 @@ namespace WebApplicationFinal.Views
 
                 GridViewRow row = gvDatos.Rows[fila];
 
-                ddlRol.SelectedValue = row.Cells[2].Text;
-                txtNombre.Text = row.Cells[3].Text;
-                txtCorreo.Text = row.Cells[4].Text;
-                txtUsuario.Text = row.Cells[5].Text;
-                txtPassword.Text = row.Cells[6].Text;
+                ddlRol.SelectedValue = row.Cells[3].Text;
+                txtNombre.Text = row.Cells[4].Text;
+                txtCorreo.Text = row.Cells[5].Text;
+                txtUsuario.Text = row.Cells[6].Text;
+                txtPassword.Text = row.Cells[7].Text;
 
                 pnlFormulario.Visible = true;
-
                 btnGuardar.Text = "Actualizar";
             }
-        }
 
+            // ==========================
+            // ELIMINAR
+            // ==========================
+            if (e.CommandName == "Eliminar")
+            {
+                int fila = Convert.ToInt32(e.CommandArgument);
+
+                int id = Convert.ToInt32(gvDatos.DataKeys[fila].Value);
+
+                if (servicio.EliminarUsuario(id, Session["Nombre"].ToString()))
+                {
+                    CargarUsuarios();
+
+                    pnlFormulario.Visible = false;
+                    btnGuardar.Text = "Guardar";
+                }
+            }
+        }
     }
 }

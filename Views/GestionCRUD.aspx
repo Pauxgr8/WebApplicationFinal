@@ -210,14 +210,31 @@ body{
     OnRowCommand="gvDatos_RowCommand">
  
     <Columns>
+
+<asp:TemplateField HeaderText="">
+<ItemTemplate>
+<asp:Button
+                    ID="btnEditar"
+                    runat="server"
+                    Text="Editar"
+                    CssClass="btn btn-warning btn-sm"
+                    CommandName="Editar"
+                    CommandArgument="<%# Container.DataItemIndex %>" />
+</ItemTemplate>
+</asp:TemplateField>
  
-        <asp:ButtonField
-            Text="Editar"
-            ButtonType="Button"
-            CommandName="Editar"
-            ControlStyle-CssClass="btn btn-warning btn-sm" 
-            CausesValidation="false"/>
-       
+   
+<asp:TemplateField HeaderText="">
+<ItemTemplate>
+<asp:Button
+                    ID="btnEliminar"
+                    runat="server"
+                    Text="Eliminar"
+                    CssClass="btn btn-danger btn-sm"
+                    CommandName="Eliminar"
+                    CommandArgument="<%# Container.DataItemIndex %>" />
+</ItemTemplate>
+</asp:TemplateField>
  
         <asp:BoundField DataField="IdUsuario" HeaderText="IdUsuario" />
 <asp:BoundField DataField="IdRol" HeaderText="Rol" />

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -73,16 +74,99 @@ namespace WebApplicationFinal.Services
         //======================
         // DELETE
         //======================
-        public async Task<bool> EliminarUsuario(int id, string usuario)
+        public bool EliminarUsuario(int id, string usuario)
+
+        {
+
+            using (HttpClient client = new HttpClient())
+
+            {
+
+                var respuesta = client.DeleteAsync(
+
+                    api + "Usuario/" + id +
+
+                    "?usuarioModificacion=" + usuario).Result;
+
+                return respuesta.IsSuccessStatusCode;
+
+            }
+
+        }
+        //========================
+        // GET CLIENTES
+        //========================
+        public List<Cliente> ObtenerClientes()
         {
             using (HttpClient client = new HttpClient())
             {
-                var response = await client.DeleteAsync(
-                    api + "Usuario/" + id +
-                    "?usuarioModificacion=" + usuario);
+                var respuesta = client.GetAsync(api + "Cliente").Result;
 
-                return response.IsSuccessStatusCode;
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<Cliente>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<Cliente>>(json);
             }
         }
+
+        //========================
+        // POST CLIENTE
+        //========================
+        public bool CrearCliente(Cliente cliente)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(cliente);
+
+                var contenido = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json");
+
+                var respuesta = client.PostAsync(api + "Cliente", contenido).Result;
+
+                return respuesta.IsSuccessStatusCode;
+            }
+        }
+
+        //========================
+        // PUT CLIENTE
+        //========================
+        public bool ModificarCliente(Cliente cliente)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(cliente);
+
+                var contenido = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json");
+
+                var respuesta = client.PutAsync(
+                    api + "Cliente/" + cliente.IdCliente,
+                    contenido).Result;
+
+                return respuesta.IsSuccessStatusCode;
+            }
+        }
+
+        //========================
+        // DELETE CLIENTE
+        //========================
+        public bool EliminarCliente(int id, string usuario)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.DeleteAsync(
+                    api + "Cliente/" + id +
+                    "?usuarioModificacion=" + usuario).Result;
+
+                return respuesta.IsSuccessStatusCode;
+            }
+        }
+
     }
 }
