@@ -147,11 +147,18 @@ body{
  
         </div>
  
-        <asp:Button
-            ID="btnNuevo"
-            runat="server"
-            CssClass="btn btn-primary"
-            Text="Nuevo Registro"/>
+       <asp:Button
+
+    ID="btnNuevo"
+
+    runat="server"
+
+    Text="Nuevo Registro"
+
+    CssClass="btn btn-primary"
+
+    OnClick="btnNuevo_Click" />
+ 
  
     </div>
  
@@ -168,15 +175,14 @@ body{
                         Tabla
  
                     </label>
+ <asp:DropDownList
+    ID="ddlTablas"
+    runat="server"
+    CssClass="form-select"
+    AutoPostBack="true"
+    OnSelectedIndexChanged="ddlTablas_SelectedIndexChanged">
  
-                    <asp:DropDownList
-                        ID="ddlTablas"
-                        runat="server"
-                        CssClass="form-select"
-                        AutoPostBack="true">
-
- 
-                        <asp:ListItem>Usuarios</asp:ListItem>
+    <asp:ListItem>Usuarios</asp:ListItem>
 <asp:ListItem>Clientes</asp:ListItem>
 <asp:ListItem>Genero</asp:ListItem>
 <asp:ListItem>NivelEducativo</asp:ListItem>
@@ -188,26 +194,105 @@ body{
 <asp:ListItem>CapacidadPago</asp:ListItem>
 <asp:ListItem>MedioContratacion</asp:ListItem>
  
-                    </asp:DropDownList>
+</asp:DropDownList>
  
                 </div>
  
             </div>
  
-            <asp:GridView
+           <asp:GridView
+    ID="gvDatos"
+    runat="server"
+    CssClass="table table-bordered table-hover"
+    AutoGenerateColumns="False"
+    GridLines="None"
+    DataKeyNames="IdUsuario"
+    OnRowCommand="gvDatos_RowCommand">
  
-                ID="gvDatos"
+    <Columns>
  
-                runat="server"
+        <asp:ButtonField
+            Text="Editar"
+            ButtonType="Button"
+            CommandName="Editar"
+            ControlStyle-CssClass="btn btn-warning btn-sm" 
+            CausesValidation="false"/>
+       
  
-                CssClass="table table-bordered table-hover"
+        <asp:BoundField DataField="IdUsuario" HeaderText="IdUsuario" />
+<asp:BoundField DataField="IdRol" HeaderText="Rol" />
+<asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+<asp:BoundField DataField="Correo" HeaderText="Correo" />
+<asp:BoundField DataField="UsuarioLogin" HeaderText="Usuario" />
+<asp:BoundField DataField="Contrasena" HeaderText="Contraseña" />
+<asp:CheckBoxField DataField="Activo" HeaderText="Activo" />
+<asp:BoundField DataField="FechaCreacion" HeaderText="Fecha Creación" />
+<asp:BoundField DataField="UsuarioCreacion" HeaderText="Usuario Creación" />
  
-                AutoGenerateColumns="true"
+    </Columns>
  
-                GridLines="None">
+</asp:GridView>
+
+ <asp:Panel ID="pnlFormulario" runat="server" Visible="false">
  
-            </asp:GridView>
+    <h4>Nuevo Usuario</h4>
  
+    <table class="table">
+ 
+        <tr>
+<td>Rol</td>
+<td>
+<asp:DropDownList
+        ID="ddlRol"
+        runat="server"
+        CssClass="form-control">
+ 
+        <asp:ListItem Text="Seleccione un rol" Value=""></asp:ListItem>
+<asp:ListItem Text="Administrador" Value="1"></asp:ListItem>
+<asp:ListItem Text="Consultor" Value="2"></asp:ListItem>
+ 
+    </asp:DropDownList>
+</td>
+</tr>
+ 
+        <tr>
+<td>Nombre</td>
+<td>
+<asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"/>
+</td>
+</tr>
+ 
+        <tr>
+<td>Correo</td>
+<td>
+<asp:TextBox ID="txtCorreo" runat="server" CssClass="form-control"/>
+</td>
+</tr>
+ 
+        <tr>
+<td>Usuario</td>
+<td>
+<asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"/>
+</td>
+</tr>
+ 
+        <tr>
+<td>Contraseña</td>
+<td>
+<asp:TextBox ID="txtPassword" runat="server" CssClass="form-control"/>
+</td>
+</tr>
+ 
+    </table>
+ 
+    <asp:Button
+        ID="btnGuardar"
+        runat="server"
+        Text="Guardar"
+        CssClass="btn btn-success"
+        OnClick="btnGuardar_Click"/>
+ 
+</asp:Panel>
         </div>
  
     </div>

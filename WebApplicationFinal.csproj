@@ -180,11 +180,12 @@
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\TasaInteres.cs" />
     <Compile Include="Models\TipoPrestamo.cs" />
-    <Compile Include="Models\Usuarios.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApiConfig.cs" />
     <Compile Include="Services\CapacidadPagoService.cs" />
     <Compile Include="Services\ClienteService.cs" />
+    <Compile Include="Services\CrudService.cs" />
     <Compile Include="Services\EncuestaService.cs" />
     <Compile Include="Services\GeneroService.cs" />
     <Compile Include="Services\ICapacidadPagoService.cs" />
