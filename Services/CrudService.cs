@@ -130,6 +130,25 @@ namespace WebApplicationFinal.Services
                 return respuesta.IsSuccessStatusCode;
             }
         }
+        //========================
+        // POST GENERO
+        //========================
+        public bool CrearGenero(Genero genero)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(genero);
+
+                var contenido = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json");
+
+                var respuesta = client.PostAsync(api + "Genero", contenido).Result;
+
+                return respuesta.IsSuccessStatusCode;
+            }
+        }
 
         //========================
         // PUT CLIENTE
@@ -152,6 +171,27 @@ namespace WebApplicationFinal.Services
                 return respuesta.IsSuccessStatusCode;
             }
         }
+        //========================
+        // PUT GENERO
+        //========================
+        public bool ModificarGenero(Genero genero)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(genero);
+
+                var contenido = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json");
+
+                var respuesta = client.PutAsync(
+                    api + "Genero/" + genero.IdGenero,
+                    contenido).Result;
+
+                return respuesta.IsSuccessStatusCode;
+            }
+        }
 
         //========================
         // DELETE CLIENTE
@@ -165,6 +205,39 @@ namespace WebApplicationFinal.Services
                     "?usuarioModificacion=" + usuario).Result;
 
                 return respuesta.IsSuccessStatusCode;
+            }
+        }
+
+        //========================
+        // DELETE GENERO
+        //========================
+        public bool EliminarGenero(int id, string usuario)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.DeleteAsync(
+                    api + "Genero/" + id +
+                    "?usuarioModificacion=" + usuario).Result;
+
+                return respuesta.IsSuccessStatusCode;
+            }
+        }
+
+        //========================
+        // GET GENEROS
+        //========================
+        public List<Genero> ObtenerGeneros()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.GetAsync(api + "Genero").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<Genero>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<Genero>>(json);
             }
         }
 

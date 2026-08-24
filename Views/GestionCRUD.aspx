@@ -249,8 +249,95 @@ body{
     </Columns>
  
 </asp:GridView>
+<asp:GridView
+    ID="gvClientes"
+    runat="server"
+    CssClass="table table-bordered table-hover"
+    AutoGenerateColumns="False"
+    GridLines="None"
+    DataKeyNames="IdCliente"
+    OnRowCommand="gvClientes_RowCommand">
+ 
+    <Columns>
+ 
+        <asp:TemplateField>
+<ItemTemplate>
+<asp:Button
+                    ID="btnEditarCliente"
+                    runat="server"
+                    Text="Editar"
+                    CssClass="btn btn-warning btn-sm"
+                    CommandName="Editar"
+                    CommandArgument="<%# Container.DataItemIndex %>" />
+</ItemTemplate>
+</asp:TemplateField>
+ 
+        <asp:TemplateField>
+<ItemTemplate>
+<asp:Button
+                    ID="btnEliminarCliente"
+                    runat="server"
+                    Text="Eliminar"
+                    CssClass="btn btn-danger btn-sm"
+                    CommandName="Eliminar"
+                    CommandArgument="<%# Container.DataItemIndex %>" />
+</ItemTemplate>
+</asp:TemplateField>
+ 
+        <asp:BoundField DataField="IdCliente" HeaderText="Id" />
+<asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+<asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+<asp:BoundField DataField="Correo" HeaderText="Correo" />
+<asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+ 
+    </Columns>
+ 
+</asp:GridView>
+<asp:GridView
+    ID="gvGenero"
+    runat="server"
+    CssClass="table table-bordered table-hover"
+    AutoGenerateColumns="False"
+    GridLines="None"
+    DataKeyNames="IdGenero"
+    Visible="false"
+    OnRowCommand="gvGenero_RowCommand">
+ 
+    <Columns>
+ 
+        <asp:TemplateField>
+<ItemTemplate>
+<asp:Button
+                    ID="btnEditarGenero"
+                    runat="server"
+                    Text="Editar"
+                    CssClass="btn btn-warning btn-sm"
+                    CommandName="Editar"
+                    CommandArgument="<%# Container.DataItemIndex %>" />
+</ItemTemplate>
+</asp:TemplateField>
+ 
+        <asp:TemplateField>
+<ItemTemplate>
+<asp:Button
+                    ID="btnEliminarGenero"
+                    runat="server"
+                    Text="Eliminar"
+                    CssClass="btn btn-danger btn-sm"
+                    CommandName="Eliminar"
+                    CommandArgument="<%# Container.DataItemIndex %>" />
+</ItemTemplate>
+</asp:TemplateField>
+ 
+        <asp:BoundField DataField="IdGenero" HeaderText="ID" />
+<asp:BoundField DataField="Nombre" HeaderText="Descripción" />
+<asp:CheckBoxField DataField="Activo" HeaderText="Activo" />
+ 
+    </Columns>
+ 
+</asp:GridView>
 
- <asp:Panel ID="pnlFormulario" runat="server" Visible="false">
+ <asp:Panel ID="pnlUsuario" runat="server" Visible="false">
  
     <h4>Nuevo Usuario</h4>
  
@@ -308,6 +395,112 @@ body{
         Text="Guardar"
         CssClass="btn btn-success"
         OnClick="btnGuardar_Click"/>
+ 
+</asp:Panel>
+            <asp:Panel ID="pnlCliente"
+    runat="server"
+    Visible="false">
+ 
+    <h4>Nuevo Cliente</h4>
+ 
+    <table class="table">
+ 
+        <tr>
+<td>Nombre</td>
+<td>
+<asp:TextBox ID="txtNombreCliente"
+                    runat="server"
+                    CssClass="form-control" />
+</td>
+</tr>
+ 
+        <tr>
+<td>Apellido</td>
+<td>
+<asp:TextBox ID="txtApellidoCliente"
+                    runat="server"
+                    CssClass="form-control" />
+</td>
+</tr>
+ 
+        <tr>
+<td>Correo</td>
+<td>
+<asp:TextBox ID="txtCorreoCliente"
+                    runat="server"
+                    CssClass="form-control" />
+</td>
+</tr>
+ 
+        <tr>
+<td>Teléfono</td>
+<td>
+<asp:TextBox ID="txtTelefonoCliente"
+                    runat="server"
+                    CssClass="form-control" />
+</td>
+</tr>
+        <tr>
+<td colspan="2" style="text-align:center">
+<asp:Button
+            ID="Button1"
+            runat="server"
+            Text="Guardar"
+            CssClass="btn btn-primary"
+            OnClick="btnGuardarCliente_Click" />
+</td>
+</tr>
+ 
+    </table>
+ 
+    <asp:Button
+        ID="btnGuardarCliente"
+        runat="server"
+        Text="Guardar Cliente"
+        CssClass="btn btn-success"
+        OnClick="btnGuardarCliente_Click" />
+ 
+</asp:Panel>
+
+<asp:Panel ID="pnlGenero" runat="server" Visible="false">
+ 
+    <h4>Nuevo Género</h4>
+ 
+    <table class="table">
+ 
+        <tr>
+<td>Descripción</td>
+<td>
+<asp:TextBox
+                    ID="txtNombreGenero"
+                    runat="server"
+                    CssClass="form-control">
+</asp:TextBox>
+</td>
+</tr>
+ 
+        <tr>
+<td>Activo</td>
+<td>
+<asp:CheckBox
+                    ID="chkActivoGenero"
+                    runat="server"
+                    Checked="true" />
+</td>
+</tr>
+ 
+        <tr>
+<td colspan="2" style="text-align:center">
+<asp:Button
+                    ID="btnGuardarGenero"
+                    runat="server"
+                    Text="Guardar"
+                    CssClass="btn btn-primary"
+                    OnClick="btnGuardarGenero_Click" />
+</td>
+</tr>
+ 
+    </table>
  
 </asp:Panel>
         </div>
