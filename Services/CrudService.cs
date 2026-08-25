@@ -155,7 +155,7 @@ namespace WebApplicationFinal.Services
         //========================
         public bool ModificarCliente(Cliente cliente)
         {
-            using (HttpClient client = new HttpClient())
+            using (HttpClient http = new HttpClient())
             {
                 string json = JsonConvert.SerializeObject(cliente);
 
@@ -164,11 +164,12 @@ namespace WebApplicationFinal.Services
                     Encoding.UTF8,
                     "application/json");
 
-                var respuesta = client.PutAsync(
+                var respuesta = http.PutAsync(
                     api + "Cliente/" + cliente.IdCliente,
                     contenido).Result;
 
-                return respuesta.IsSuccessStatusCode;
+               
+               return respuesta.IsSuccessStatusCode;
             }
         }
         //========================

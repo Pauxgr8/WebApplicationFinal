@@ -442,12 +442,7 @@ body{
 </tr>
         <tr>
 <td colspan="2" style="text-align:center">
-<asp:Button
-            ID="Button1"
-            runat="server"
-            Text="Guardar"
-            CssClass="btn btn-primary"
-            OnClick="btnGuardarCliente_Click" />
+
 </td>
 </tr>
  

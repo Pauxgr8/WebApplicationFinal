@@ -303,8 +303,7 @@ namespace WebApplicationFinal.Views
                 // Obtener el Id del cliente seleccionado
                 int idCliente = Convert.ToInt32(gvClientes.DataKeys[fila].Value);
 
-                // Solo para comprobar
-                Response.Write("<script>alert('Id Cliente = " + idCliente + "');</script>");
+              
 
                 // Guardar el Id para usarlo al actualizar
                 ViewState["IdClienteEditar"] = idCliente;
@@ -371,6 +370,9 @@ namespace WebApplicationFinal.Views
             else
             {
                 cliente.IdCliente = Convert.ToInt32(ViewState["IdClienteEditar"]);
+
+                // IMPORTANTE: la API lo requiere también al actualizar
+                cliente.UsuarioCreacion = Session["Nombre"].ToString();
                 cliente.UsuarioModificacion = Session["Nombre"].ToString();
 
                 if (servicio.ModificarCliente(cliente))
