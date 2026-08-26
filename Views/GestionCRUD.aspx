@@ -102,27 +102,27 @@ body{
         Dashboard
 </a>
  
-    <a href="#">
+    <a href="GestionCRUD.aspx">
 <i class="fa fa-users"></i>
         Clientes
 </a>
  
-    <a href="#">
+    <a href="GestionCRUD.aspx">
 <i class="fa fa-user"></i>
         Usuarios
 </a>
  
-    <a href="#">
+    <a href="Encuesta.aspx">
 <i class="fa fa-file"></i>
         Encuestas
 </a>
  
-    <a href="#">
+    <a href="Reportes.aspx">
 <i class="fa fa-chart-bar"></i>
         Reportes
 </a>
  
-    <hr/>
+    <hr />
  
     <a href="Default.aspx">
 <i class="fa fa-right-from-bracket"></i>
@@ -175,7 +175,7 @@ body{
                         Tabla
  
                     </label>
- <asp:DropDownList
+<asp:DropDownList
     ID="ddlTablas"
     runat="server"
     CssClass="form-select"
@@ -185,7 +185,9 @@ body{
     <asp:ListItem>Usuarios</asp:ListItem>
 <asp:ListItem>Clientes</asp:ListItem>
 <asp:ListItem>Genero</asp:ListItem>
-<asp:ListItem>NivelEducativo</asp:ListItem>
+<asp:ListItem>Encuestas</asp:ListItem>
+ 
+    <asp:ListItem>NivelEducativo</asp:ListItem>
 <asp:ListItem>RangoEdad</asp:ListItem>
 <asp:ListItem>RangoIngresos</asp:ListItem>
 <asp:ListItem>TipoPrestamo</asp:ListItem>
@@ -337,6 +339,68 @@ body{
  
 </asp:GridView>
 
+<asp:GridView
+    ID="gvEncuestas"
+    runat="server"
+    CssClass="table table-bordered table-hover"
+    AutoGenerateColumns="False"
+    GridLines="None"
+    DataKeyNames="IdEncuesta"
+    Visible="false"
+    OnRowCommand="gvEncuestas_RowCommand">
+ 
+    <Columns>
+ 
+        <asp:ButtonField
+            Text="Editar"
+            CommandName="Editar"
+            ButtonType="Button"
+            ControlStyle-CssClass="btn btn-warning" />
+ 
+        <asp:ButtonField
+            Text="Eliminar"
+            CommandName="Eliminar"
+            ButtonType="Button"
+            ControlStyle-CssClass="btn btn-danger" />
+ 
+        <asp:BoundField
+            DataField="IdEncuesta"
+            HeaderText="Id" />
+ 
+        <asp:BoundField
+            DataField="FechaEncuesta"
+            HeaderText="Fecha" />
+ 
+        <asp:BoundField
+            DataField="IdCliente"
+            HeaderText="Cliente" />
+ 
+        <asp:BoundField
+            DataField="IdUsuario"
+            HeaderText="Usuario" />
+ 
+        <asp:BoundField
+            DataField="IdTipoPrestamo"
+            HeaderText="Tipo Prestamo" />
+ 
+        <asp:BoundField
+            DataField="IdPlazo"
+            HeaderText="Plazo" />
+        <asp:BoundField
+        DataField="IdTasaInteres"
+        HeaderText="Tasa Interés" />
+ 
+    <asp:BoundField
+        DataField="IdCapacidadPago"
+        HeaderText="Capacidad Pago" />
+ 
+    <asp:BoundField
+        DataField="IdMedioContratacion"
+        HeaderText="Medio Contratación" />
+ 
+    </Columns>
+ 
+</asp:GridView>
  <asp:Panel ID="pnlUsuario" runat="server" Visible="false">
  
     <h4>Nuevo Usuario</h4>
@@ -498,6 +562,116 @@ body{
     </table>
  
 </asp:Panel>
+
+            <asp:Panel ID="pnlEncuesta"
+
+    runat="server"
+
+    Visible="false">
+ 
+    <h4>Nueva Encuesta</h4>
+ 
+<table class="table">
+ 
+<tr>
+<td>Fecha Encuesta</td>
+<td>
+<asp:TextBox
+            ID="txtFechaEncuesta"
+            runat="server"
+            TextMode="Date"
+            CssClass="form-control" />
+</td>
+</tr>
+ 
+<tr>
+<td>Cliente</td>
+<td>
+<asp:TextBox
+            ID="txtIdCliente"
+            runat="server"
+            CssClass="form-control" />
+</td>
+</tr>
+ 
+<tr>
+<td>Usuario</td>
+<td>
+<asp:TextBox
+            ID="txtIdUsuario"
+            runat="server"
+            CssClass="form-control" />
+</td>
+</tr>
+ 
+<tr>
+<td>Tipo Préstamo</td>
+<td>
+<asp:TextBox
+            ID="txtIdTipoPrestamo"
+            runat="server"
+            CssClass="form-control" />
+</td>
+</tr>
+ 
+<tr>
+<td>Plazo</td>
+<td>
+<asp:TextBox
+            ID="txtIdPlazo"
+            runat="server"
+            CssClass="form-control" />
+</td>
+</tr>
+ 
+<tr>
+<td>Tasa Interés</td>
+<td>
+<asp:TextBox
+            ID="txtIdTasaInteres"
+            runat="server"
+            CssClass="form-control" />
+</td>
+</tr>
+ 
+<tr>
+<td>Capacidad Pago</td>
+<td>
+<asp:TextBox
+            ID="txtIdCapacidadPago"
+            runat="server"
+            CssClass="form-control" />
+</td>
+</tr>
+ 
+<tr>
+<td>Medio Contratación</td>
+<td>
+<asp:TextBox
+            ID="txtIdMedioContratacion"
+            runat="server"
+            CssClass="form-control" />
+</td>
+</tr>
+ 
+<tr>
+<td colspan="2" style="text-align:center">
+ 
+        <asp:Button
+            ID="btnGuardarEncuesta"
+            runat="server"
+            Text="Guardar Encuesta"
+            CssClass="btn btn-success"
+            OnClick="btnGuardarEncuesta_Click"/>
+ 
+    </td>
+</tr>
+ 
+</table>
+ 
+</asp:Panel>
+ 
+
         </div>
  
     </div>

@@ -242,5 +242,255 @@ namespace WebApplicationFinal.Services
             }
         }
 
+        //========================
+
+        // GET ENCUESTAS
+
+        //========================
+
+        public List<Encuesta> ObtenerEncuestas()
+
+        {
+
+            using (HttpClient client = new HttpClient())
+
+            {
+
+                var respuesta = client.GetAsync(api + "Encuesta").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+
+                    return new List<Encuesta>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<Encuesta>>(json);
+
+            }
+
+        }
+
+        //========================
+        // POST ENCUESTA
+        //========================
+        public bool CrearEncuesta(Encuesta encuesta)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(encuesta);
+
+                var contenido = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json");
+
+                var respuesta = client.PostAsync(api + "Encuesta", contenido).Result;
+
+                return respuesta.IsSuccessStatusCode;
+            }
+        }
+
+        //========================
+        // PUT ENCUESTA
+        //========================
+        public bool ModificarEncuesta(Encuesta encuesta)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(encuesta);
+
+                var contenido = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json");
+
+                var respuesta = client.PutAsync(
+                    api + "Encuesta/" + encuesta.IdEncuesta,
+                    contenido).Result;
+
+                return respuesta.IsSuccessStatusCode;
+            }
+        }
+        //========================
+        // DELETE ENCUESTA
+        //========================
+        public bool EliminarEncuesta(int id, string usuario)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.DeleteAsync(
+                    api + "Encuesta/" + id +
+                    "?usuarioModificacion=" + usuario).Result;
+
+                return respuesta.IsSuccessStatusCode;
+            }
+        }
+
+        //========================
+        // GET NIVEL EDUCATIVO
+        //========================
+        public List<NivelEducativo> ObtenerNivelEducativo()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.GetAsync(api + "NivelEducativo").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<NivelEducativo>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<NivelEducativo>>(json);
+            }
+        }
+        //========================
+        // GET RANGO EDAD
+        //========================
+        public List<RangoEdad> ObtenerRangoEdad()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.GetAsync(api + "RangoEdad").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<RangoEdad>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<RangoEdad>>(json);
+            }
+        }
+        //========================
+        // GET RANGO INGRESOS
+        //========================
+        public List<RangoIngresos> ObtenerRangoIngresos()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.GetAsync(api + "RangoIngresos").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<RangoIngresos>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<RangoIngresos>>(json);
+            }
+        }
+        //========================
+        // GET TIPO PRESTAMOS
+        //========================
+        public List<TipoPrestamo> ObtenerTipoPrestamos()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.GetAsync(api + "TipoPrestamo").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<TipoPrestamo>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<TipoPrestamo>>(json);
+            }
+        }
+        //========================
+        // GET PLAZOS
+        //========================
+        public List<Plazo> ObtenerPlazos()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.GetAsync(api + "Plazo").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<Plazo>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<Plazo>>(json);
+            }
+        }
+        //========================
+        // GET TASAS INTERES
+        //========================
+        public List<TasaInteres> ObtenerTasasInteres()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.GetAsync(api + "TasaInteres").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<TasaInteres>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<TasaInteres>>(json);
+            }
+        }
+
+        //========================
+        // GET CAPACIDAD PAGO
+        //========================
+        public List<CapacidadPago> ObtenerCapacidadesPago()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.GetAsync(api + "CapacidadPago").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<CapacidadPago>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<CapacidadPago>>(json);
+            }
+        }
+
+        //========================
+        // GET MEDIO CONTRATACION
+        //========================
+        public List<MedioContratacion> ObtenerMediosContratacion()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var respuesta = client.GetAsync(api + "MedioContratacion").Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                    return new List<MedioContratacion>();
+
+                string json = respuesta.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<MedioContratacion>>(json);
+            }
+        }
+
+        public bool CrearRespuesta(Respuesta respuesta)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(api);
+
+                var response = client.PostAsJsonAsync("Respuesta", respuesta).Result;
+
+                return response.IsSuccessStatusCode;
+            }
+        }
+        public List<Respuesta> ObtenerRespuestas()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = client.GetAsync(api + "Respuesta").Result;
+
+                if (!response.IsSuccessStatusCode)
+                    return new List<Respuesta>();
+
+                string json = response.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<Respuesta>>(json);
+            }
+        }
+
     }
 }
+

@@ -53,10 +53,12 @@ namespace WebApplicationFinal.Views
                     pnlUsuario.Visible = false;
                     pnlCliente.Visible = false;
                     pnlGenero.Visible = false;
+                    pnlEncuesta.Visible = false;
 
                     gvDatos.Visible = true;
                     gvClientes.Visible = false;
                     gvGenero.Visible = false;
+                    gvEncuestas.Visible = false;
 
                     CargarUsuarios();
 
@@ -67,10 +69,13 @@ namespace WebApplicationFinal.Views
                     pnlUsuario.Visible = false;
                     pnlCliente.Visible = false;
                     pnlGenero.Visible = false;
+                    pnlEncuesta.Visible = false;
+                    
 
                     gvDatos.Visible = false;
                     gvClientes.Visible = true;
                     gvGenero.Visible = false;
+                    gvEncuestas.Visible = false;
 
                     CargarClientes();
 
@@ -81,12 +86,30 @@ namespace WebApplicationFinal.Views
                     pnlUsuario.Visible = false;
                     pnlCliente.Visible = false;
                     pnlGenero.Visible = false;
+                    pnlEncuesta.Visible = false;
 
                     gvDatos.Visible = false;
                     gvClientes.Visible = false;
                     gvGenero.Visible = true;
+                    gvEncuestas.Visible = false;
 
                     CargarGeneros();
+
+                    break;
+
+                case "Encuestas":
+
+                    pnlUsuario.Visible = false;
+                    pnlCliente.Visible = false;
+                    pnlGenero.Visible = false;
+                    pnlEncuesta.Visible = false;
+
+                    gvDatos.Visible = false;
+                    gvClientes.Visible = false;
+                    gvGenero.Visible = false;
+                    gvEncuestas.Visible = true;
+
+                    CargarEncuestas();
 
                     break;
 
@@ -158,12 +181,20 @@ namespace WebApplicationFinal.Views
             gvClientes.DataSource = servicio.ObtenerClientes();
             gvClientes.DataBind();
         }
+        private void CargarEncuestas()
+        {
+            CrudService servicio = new CrudService();
+
+            gvEncuestas.DataSource = servicio.ObtenerEncuestas();
+            gvEncuestas.DataBind();
+        }
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             // Ocultar todos los formularios
             pnlUsuario.Visible = false;
             pnlCliente.Visible = false;
             pnlGenero.Visible = false;
+            pnlEncuesta.Visible = false;   // <-- agregar
 
             if (ddlTablas.SelectedValue == "Usuarios")
             {
@@ -182,6 +213,12 @@ namespace WebApplicationFinal.Views
                 LimpiarFormularioGenero();
                 btnGuardarGenero.Text = "Guardar";
                 pnlGenero.Visible = true;
+            }
+            else if (ddlTablas.SelectedValue == "Encuestas")
+            {
+                LimpiarFormularioEncuesta();
+                btnGuardarEncuesta.Text = "Guardar";
+                pnlEncuesta.Visible = true;
             }
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -409,6 +446,17 @@ namespace WebApplicationFinal.Views
             pnlGenero.Visible = false;
         }
 
+        private void LimpiarFormularioEncuesta()
+        {
+            txtFechaEncuesta.Text = "";
+            txtIdCliente.Text = "";
+            txtIdUsuario.Text = "";
+            txtIdTipoPrestamo.Text = "";
+            txtIdPlazo.Text = "";
+            txtIdTasaInteres.Text = "";
+            txtIdCapacidadPago.Text = "";
+            txtIdMedioContratacion.Text = "";
+        }
         protected void btnGuardarGenero_Click(object sender, EventArgs e)
         {
             CrudService servicio = new CrudService();
@@ -486,6 +534,85 @@ namespace WebApplicationFinal.Views
                     LimpiarFormularioGenero();
 
                     btnGuardarGenero.Text = "Guardar";
+                }
+            }
+        }
+
+        protected void btnGuardarEncuesta_Click(object sender, EventArgs e)
+        {
+            CrudService servicio = new CrudService();
+
+            WebApplicationFinal.Models.Encuesta encuesta =
+            new WebApplicationFinal.Models.Encuesta();
+
+            encuesta.FechaEncuesta = Convert.ToDateTime(txtFechaEncuesta.Text);
+            encuesta.IdCliente = Convert.ToInt32(txtIdCliente.Text);
+            encuesta.IdUsuario = Convert.ToInt32(txtIdUsuario.Text);
+            encuesta.IdTipoPrestamo = Convert.ToInt32(txtIdTipoPrestamo.Text);
+            encuesta.IdPlazo = Convert.ToInt32(txtIdPlazo.Text);
+            encuesta.IdTasaInteres = Convert.ToInt32(txtIdTasaInteres.Text);
+            encuesta.IdCapacidadPago = Convert.ToInt32(txtIdCapacidadPago.Text);
+            encuesta.IdMedioContratacion = Convert.ToInt32(txtIdMedioContratacion.Text);
+
+            encuesta.Activo = true;
+
+            if (btnGuardarEncuesta.Text == "Guardar")
+            {
+                encuesta.UsuarioCreacion = Session["Nombre"].ToString();
+
+                if (servicio.CrearEncuesta(encuesta))
+                {
+                    CargarEncuestas();
+                    LimpiarFormularioEncuesta();
+                }
+            }
+            else
+            {
+                encuesta.IdEncuesta = Convert.ToInt32(ViewState["IdEncuestaEditar"]);
+                encuesta.UsuarioModificacion = Session["Nombre"].ToString();
+
+                if (servicio.ModificarEncuesta(encuesta))
+                {
+                    CargarEncuestas();
+                    LimpiarFormularioEncuesta();
+                    btnGuardarEncuesta.Text = "Guardar";
+                }
+            }
+        }
+
+        protected void gvEncuestas_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            CrudService servicio = new CrudService();
+
+            if (e.CommandName == "Editar")
+            {
+                int fila = Convert.ToInt32(e.CommandArgument);
+
+                int idEncuesta = Convert.ToInt32(gvEncuestas.DataKeys[fila].Value);
+
+                GridViewRow row = gvEncuestas.Rows[fila];
+
+                ViewState["IdEncuestaEditar"] = idEncuesta;
+
+                txtFechaEncuesta.Text = row.Cells[3].Text;
+                txtIdCliente.Text = row.Cells[4].Text;
+                txtIdUsuario.Text = row.Cells[5].Text;
+                txtIdTipoPrestamo.Text = row.Cells[6].Text;
+                txtIdPlazo.Text = row.Cells[7].Text;
+
+                pnlEncuesta.Visible = true;
+                btnGuardarEncuesta.Text = "Actualizar";
+            }
+
+            if (e.CommandName == "Eliminar")
+            {
+                int fila = Convert.ToInt32(e.CommandArgument);
+
+                int idEncuesta = Convert.ToInt32(gvEncuestas.DataKeys[fila].Value);
+
+                if (servicio.EliminarEncuesta(idEncuesta, Session["Nombre"].ToString()))
+                {
+                    CargarEncuestas();
                 }
             }
         }
