@@ -12,8 +12,26 @@ namespace WebApplicationFinal.Views
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Si no ha iniciado sesión
+            if (Session["Rol"] == null)
+            {
+                Response.Redirect("Default.aspx");
+                return;
+            }
 
+            // El Encuestador no puede entrar a Reportes
+            if (Session["Rol"].ToString() == "Encuestador")
+            {
+                Response.Redirect("Encuesta.aspx");
+                return;
+            }
+
+            if (!IsPostBack)
+            {
+                // aquí queda todo tu código actual
+            }
         }
+        
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {

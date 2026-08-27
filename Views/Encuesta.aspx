@@ -55,11 +55,12 @@
  
         .content {
             margin-left: 250px;
+            margin-top: 70px;
             padding: 30px;
         }
  
         .card {
-            border: none;
+            border: white;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0,0,0,.15);
             padding: 25px;
@@ -78,25 +79,51 @@
  
     <div class="sidebar">
  
-        <a href="GestionCRUD.aspx">
+      <% if (Session["Rol"].ToString() == "Administrador") { %>
+ 
+<a href="GestionCRUD.aspx">
 <i class="fa fa-chart-line"></i> Dashboard
 </a>
  
-        <a href="GestionCRUD.aspx">
+<a href="GestionCRUD.aspx">
 <i class="fa fa-users"></i> Clientes
 </a>
  
-        <a href="GestionCRUD.aspx">
+<a href="GestionCRUD.aspx">
 <i class="fa fa-user"></i> Usuarios
 </a>
  
-        <a href="Encuesta.aspx">
+<a href="Encuesta.aspx">
 <i class="fa fa-file"></i> Encuestas
 </a>
  
-        <a href="Reportes.aspx">
+<a href="Reportes.aspx">
 <i class="fa fa-chart-bar"></i> Reportes
 </a>
+ 
+<% } %>
+ 
+<% if (Session["Rol"].ToString() == "Consultor") { %>
+ 
+<a href="Reportes.aspx">
+<i class="fa fa-chart-bar"></i> Reportes
+</a>
+ 
+<% } %>
+ 
+<% if (Session["Rol"].ToString() == "Encuestador") { %>
+ 
+<a href="Encuesta.aspx">
+<i class="fa fa-file"></i>
+    Nueva Encuesta
+</a>
+ 
+<a href="MisEncuestas.aspx">
+<i class="fa fa-list"></i>
+    Mis Encuestas
+</a>
+ 
+<% } %>
  
         <hr />
  

@@ -156,6 +156,7 @@
     <Content Include="Views\Encuesta.aspx" />
     <Content Include="Views\Estilos.css" />
     <Content Include="Views\GestionCRUD.aspx" />
+    <Content Include="Views\MisEncuestas.aspx" />
     <Content Include="Views\Reportes.aspx" />
     <Content Include="Views\Usuarios.aspx" />
     <Content Include="Web.config" />
@@ -171,6 +172,7 @@
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\LoginResponse.cs" />
     <Compile Include="Models\MedioContratacion.cs" />
+    <Compile Include="Models\MisEncuestas.cs" />
     <Compile Include="Models\NivelEducativo.cs" />
     <Compile Include="Models\Plazo.cs" />
     <Compile Include="Models\Pregunta.cs" />
@@ -257,6 +259,13 @@
     </Compile>
     <Compile Include="Views\GestionCRUD.aspx.designer.cs">
       <DependentUpon>GestionCRUD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MisEncuestas.aspx.cs">
+      <DependentUpon>MisEncuestas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\MisEncuestas.aspx.designer.cs">
+      <DependentUpon>MisEncuestas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Reportes.aspx.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>

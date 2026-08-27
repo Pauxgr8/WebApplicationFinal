@@ -26,24 +26,26 @@ namespace WebApplicationFinal.Views
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Validar sesión
-            if (Session["Nombre"] == null)
+            // Verificar que exista una sesión
+            if (Session["Rol"] == null)
             {
                 Response.Redirect("Default.aspx");
                 return;
             }
 
-            // Mostrar nombre del usuario
-            lblNombre.Text = "Bienvenido, " + Session["Nombre"].ToString();
+            // Solo el Administrador puede entrar aquí
+            if (Session["Rol"].ToString() != "Administrador")
+            {
+                Response.Redirect("Default.aspx");
+                return;
+            }
 
-            // Cargar información únicamente la primera vez
             if (!IsPostBack)
             {
-                ddlTablas.SelectedValue = "Usuarios";
-                CargarTabla();
+                CargarClientes();
+                CargarUsuarios();
             }
         }
-
         private void CargarTabla()
         {
             switch (ddlTablas.SelectedValue)

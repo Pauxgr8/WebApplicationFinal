@@ -15,7 +15,7 @@ namespace WebApplicationFinal.Views
             }
         }
 
-        protected  void btnIngresar_Click(object sender, EventArgs e)
+        protected void btnIngresar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -36,15 +36,29 @@ namespace WebApplicationFinal.Views
                     return;
                 }
 
-                // Guardar sesión
                 Session["IdUsuario"] = usuario.IdUsuario;
                 Session["Nombre"] = usuario.Nombre;
                 Session["Usuario"] = usuario.Usuario;
                 Session["Rol"] = usuario.Rol;
                 Session["IdRol"] = usuario.IdRol;
 
-                // Redirigir al sistema
-                Response.Redirect("GestionCRUD.aspx");
+                if (usuario.Rol == "Administrador")
+                {
+                    Response.Redirect("GestionCRUD.aspx");
+                }
+                else if (usuario.Rol == "Consultor")
+                {
+                    Response.Redirect("Reportes.aspx");
+                }
+                else if (usuario.Rol == "Encuestador")
+                {
+                    Response.Redirect("Encuesta.aspx");
+                }
+                else
+                {
+                    lblMensaje.Text = "Rol no reconocido.";
+                    lblMensaje.ForeColor = System.Drawing.Color.Red;
+                }
             }
             catch (Exception ex)
             {

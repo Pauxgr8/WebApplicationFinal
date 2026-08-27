@@ -107,7 +107,7 @@ body{
         Clientes
 </a>
  
-    <a href="GestionCRUD.aspx">
+    <a href="Usuarios.aspx">
 <i class="fa fa-user"></i>
         Usuarios
 </a>
@@ -418,6 +418,7 @@ body{
         <asp:ListItem Text="Seleccione un rol" Value=""></asp:ListItem>
 <asp:ListItem Text="Administrador" Value="1"></asp:ListItem>
 <asp:ListItem Text="Consultor" Value="2"></asp:ListItem>
+    <asp:ListItem Text="Encuestador" Value="1002"></asp:ListItem>
  
     </asp:DropDownList>
 </td>

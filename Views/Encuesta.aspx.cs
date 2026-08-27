@@ -80,7 +80,7 @@ namespace WebApplicationFinal.Views
 
             // Ajusta estos dos según tu login
             encuesta.IdCliente = 1;
-            encuesta.IdUsuario = 2; //admin
+            encuesta.IdUsuario = Convert.ToInt32(Session["IdUsuario"]);
 
             encuesta.IdTipoPrestamo = Convert.ToInt32(ddlTipoPrestamo.SelectedValue);
             encuesta.IdPlazo = Convert.ToInt32(ddlPlazo.SelectedValue);
@@ -97,7 +97,7 @@ namespace WebApplicationFinal.Views
                 }
             }
 
-            encuesta.UsuarioCreacion = "Administrador";
+            encuesta.UsuarioCreacion = Session["IdUsuario"].ToString();
             encuesta.Activo = true;
 
             bool resultado = servicio.CrearEncuesta(encuesta);

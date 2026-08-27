@@ -491,6 +491,20 @@ namespace WebApplicationFinal.Services
             }
         }
 
+        public List<MisEncuestas> ObtenerMisEncuestas(int idUsuario)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = client.GetAsync(api + "Encuesta/mis-encuestas/" + idUsuario).Result;
+
+                if (!response.IsSuccessStatusCode)
+                    return new List<MisEncuestas>();
+                
+                string json = response.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<List<MisEncuestas>>(json);
+            }
+        }
     }
 }
 

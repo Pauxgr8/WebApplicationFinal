@@ -99,29 +99,33 @@
  
 <div class="sidebar">
  
+<% if (Session["Rol"].ToString() == "Administrador") { %>
+ 
 <a href="GestionCRUD.aspx">
 <i class="fa fa-chart-line"></i>
-Dashboard
+    Dashboard
 </a>
  
 <a href="GestionCRUD.aspx">
 <i class="fa fa-users"></i>
-Clientes
+    Clientes
 </a>
  
 <a href="GestionCRUD.aspx">
 <i class="fa fa-user"></i>
-Usuarios
+    Usuarios
 </a>
+ 
+<% } %>
  
 <a href="Encuesta.aspx">
 <i class="fa fa-file"></i>
-Encuestas
+    Encuestas
 </a>
  
 <a href="Reportes.aspx">
 <i class="fa fa-chart-bar"></i>
-Reportes
+    Reportes
 </a>
  
 <hr />
