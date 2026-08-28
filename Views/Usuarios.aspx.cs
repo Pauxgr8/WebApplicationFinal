@@ -137,12 +137,13 @@ namespace WebApplicationFinal.Views
             {
                 int fila = Convert.ToInt32(e.CommandArgument);
 
-                IdUsuarioEditar =
-                    Convert.ToInt32(gvDatos.DataKeys[fila].Value);
+                    IdUsuarioEditar =Convert.ToInt32(gvDatos.DataKeys[fila].Values["idUsuario"]);
+
+                ddlRol.SelectedValue = gvDatos.DataKeys[fila].Values["idRol"].ToString();
 
                 GridViewRow row = gvDatos.Rows[fila];
 
-                ddlRol.SelectedValue = row.Cells[3].Text;
+                
                 txtNombre.Text = Server.HtmlDecode(row.Cells[4].Text);
                 txtCorreo.Text = Server.HtmlDecode(row.Cells[5].Text);
                 txtUsuario.Text = Server.HtmlDecode(row.Cells[6].Text);

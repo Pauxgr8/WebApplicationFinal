@@ -248,7 +248,7 @@ CssClass="table table-bordered table-hover"
  
 AutoGenerateColumns="False"
  
-DataKeyNames="IdUsuario"
+DataKeyNames="IdUsuario, idRol"
  
 OnRowCommand="gvDatos_RowCommand">
  
@@ -300,7 +300,7 @@ CommandArgument="<%# Container.DataItemIndex %>"/>
  
 <asp:BoundField DataField="IdUsuario" HeaderText="ID"/>
  
-<asp:BoundField DataField="IdRol" HeaderText="Rol"/>
+<asp:BoundField DataField="NombreRol" HeaderText="Rol"/>
  
 <asp:BoundField DataField="Nombre" HeaderText="Nombre"/>
  

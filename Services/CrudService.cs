@@ -33,7 +33,6 @@ namespace WebApplicationFinal.Services
         //======================
         // POST
         //======================
-
         public bool CrearUsuario(Usuario usuario)
         {
             using (HttpClient client = new HttpClient())
@@ -42,12 +41,23 @@ namespace WebApplicationFinal.Services
 
                 var contenido = new StringContent(
                     json,
-                    System.Text.Encoding.UTF8,
+                    Encoding.UTF8,
                     "application/json");
 
                 var respuesta = client.PostAsync(api + "Usuario", contenido).Result;
 
-                return respuesta.IsSuccessStatusCode;
+                // Leer la respuesta del API
+                string mensaje = respuesta.Content.ReadAsStringAsync().Result;
+
+                if (!respuesta.IsSuccessStatusCode)
+                {
+                    throw new Exception(
+                        "STATUS: " + respuesta.StatusCode +
+                        "\n\nJSON ENVIADO:\n" + json +
+                        "\n\nRESPUESTA API:\n" + mensaje);
+                }
+
+                return true;
             }
         }
         //======================
